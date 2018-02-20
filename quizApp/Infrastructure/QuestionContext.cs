@@ -1,13 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ApplicationCore.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationCore.Entities
+namespace Infrastructure
 {
 
     public class QuestionContext : DbContext
     {
+        public QuestionContext(DbContextOptions<QuestionContext> options)
+    : base(options)
+        {
+        }
+
+
         public DbSet<Question> Questions { get; set; }
         // public DbSet<Post> Posts { get; set; }
 
@@ -17,7 +24,7 @@ namespace ApplicationCore.Entities
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // optionsBuilder.UseSqlServer(<amphersand goes here>"Server=(localdb)\mssqllocaldb;Database=Cohort03QuizAppEf;Trusted_Connection=True;");
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Cohort03QuizAppEf;Trusted_Connection=True;");
+            // optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Cohort03QuizAppEf;Trusted_Connection=True;");
         }
     }
 }

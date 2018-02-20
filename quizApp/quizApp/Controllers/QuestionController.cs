@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +11,24 @@ namespace quizApp.Controllers
 {
     public class QuestionController : Controller
     {
+        private readonly IQuestionRepository _questionRepository;
+
+        public QuestionController(IQuestionRepository questionRepository)
+        {
+            _questionRepository = questionRepository;
+        }
+                  
+
         // GET: Question
         public ActionResult Index()
         {
-            return View();
+            return View(_questionRepository.ListAll());
         }
 
         // GET: Question/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_questionRepository.GetById(id));
         }
 
         // GET: Question/Create
@@ -30,11 +40,16 @@ namespace quizApp.Controllers
         // POST: Question/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Question newQuestion, IFormCollection collection)
         {
+
+            if(!ModelState.IsValid)
+            {
+                return View(newQuestion);
+            }
             try
             {
-                // TODO: Add insert logic here
+                _questionRepository.AddQuestion(newQuestion);
 
                 return RedirectToAction(nameof(Index));
             }
