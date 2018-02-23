@@ -11,9 +11,10 @@ using System;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(QuestionContext))]
-    partial class QuestionContextModelSnapshot : ModelSnapshot
+    [Migration("20180221024602_AddTypeToQuestion")]
+    partial class AddTypeToQuestion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

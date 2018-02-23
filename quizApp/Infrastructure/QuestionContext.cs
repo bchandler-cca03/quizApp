@@ -16,6 +16,7 @@ namespace Infrastructure
 
 
         public DbSet<Question> Questions { get; set; }
+        
         // public DbSet<Post> Posts { get; set; }
 
         // Todo:  why did adding using Microsoft.EntityFrameWorkCore solve Jeff's squigglies but not mine
@@ -25,6 +26,11 @@ namespace Infrastructure
         {
             // optionsBuilder.UseSqlServer(<amphersand goes here>"Server=(localdb)\mssqllocaldb;Database=Cohort03QuizAppEf;Trusted_Connection=True;");
             // optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Cohort03QuizAppEf;Trusted_Connection=True;");
+        }
+
+        internal void Find(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

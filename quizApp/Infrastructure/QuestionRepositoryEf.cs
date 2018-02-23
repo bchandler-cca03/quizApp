@@ -31,7 +31,18 @@ namespace Infrastructure
 
         public Question GetById(int id)
         {
-            return new Question();   // TODO:  not sure this is right from other solution
+            var identifiedQuestion = _questionContext.Questions.FirstOrDefault(t => t.Id == id);
+            return identifiedQuestion;   // TODO:  not sure this is right from other solution
+        }
+
+        public void UpdateQuestion(Question updateQuestion)
+        {
+            var identifiedQuestion = GetById(updateQuestion.Id);
+
+            identifiedQuestion.Type = updateQuestion.Type;
+            identifiedQuestion.specificQuestion = updateQuestion.specificQuestion;
+            identifiedQuestion.specificAnswer = updateQuestion.specificAnswer;
+            _questionContext.SaveChanges();
         }
 
         public List<Question> ListAll()
@@ -40,9 +51,5 @@ namespace Infrastructure
             return _questionContext.Questions.ToList();
         }
 
-        public void UpdateQuestion(Question updateQuestion)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

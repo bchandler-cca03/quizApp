@@ -62,16 +62,21 @@ namespace quizApp.Controllers
         // GET: Question/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_questionRepository.GetById(id));
         }
 
         // POST: Question/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Question updateQuestion, int id, IFormCollection collection)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(updateQuestion);
+            }
             try
             {
+                _questionRepository.UpdateQuestion(updateQuestion);
                 // TODO: Add update logic here
 
                 return RedirectToAction(nameof(Index));
