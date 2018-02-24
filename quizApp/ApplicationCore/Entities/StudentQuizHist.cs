@@ -16,7 +16,7 @@ namespace ApplicationCore.Entities
 
         public float Grade { get; set; }
 
-        public int AttemptDateTime { get; set; }
+        public DateTime AttemptDateTime { get; set; }
 
     }
 }

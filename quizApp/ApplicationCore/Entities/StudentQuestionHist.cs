@@ -8,6 +8,8 @@ namespace ApplicationCore.Entities
     {
         // the history of an individual question associated with an individual student
 
+        public int Id { get; set; }
+
         public int QuizId { get; set; }  // QuizId is the Id of the Specific Quiz
 
         public int StudentId { get; set; }  // StudentId is the Id of the Specific Student

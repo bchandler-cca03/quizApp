@@ -8,14 +8,14 @@ namespace Infrastructure
 {
     public class StudentQuestionHistRepositoryEf : IStudentQuestionHistRepository
     {
-        private readonly StudentQuestionHistContext _studentQuestionHistContext;
+        private readonly StudentQuestionHist _studentQuestionHistContext;
 
-        public StudentQuestionHistRepositoryEf(StudentQuestionHistContext studentQuestionHistContext)
+        public StudentQuestionHistRepositoryEf(StudentQuestionHist studentQuestionHistContext)
         {
             _studentQuestionHistContext = studentQuestionHistContext;
         }
 
-        public void AddQuestion(StudentQuestionHist NewStudentQuestionHist)
+        public void AddQuestion(ApplicationCore.Entities.StudentQuestionHist NewStudentQuestionHist)
         {
             throw new NotImplementedException();
         }
@@ -30,12 +30,12 @@ namespace Infrastructure
             throw new NotImplementedException();
         }
 
-        public List<StudentQuestionHist> ListAll()
+        public List<ApplicationCore.Entities.StudentQuestionHist> ListAll()
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateQuestion(StudentQuestionHist UpdateStudentQuestionHist)
+        public void UpdateQuestion(ApplicationCore.Entities.StudentQuestionHist UpdateStudentQuestionHist)
         {
             throw new NotImplementedException();
         }
