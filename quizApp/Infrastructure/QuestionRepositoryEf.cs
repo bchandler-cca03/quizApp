@@ -39,7 +39,7 @@ namespace Infrastructure
         {
             var identifiedQuestion = GetById(updateQuestion.Id);
 
-            identifiedQuestion.Type = updateQuestion.Type;
+            identifiedQuestion.Category = updateQuestion.Category;
             identifiedQuestion.specificQuestion = updateQuestion.specificQuestion;
             identifiedQuestion.specificAnswer = updateQuestion.specificAnswer;
             _questionContext.SaveChanges();

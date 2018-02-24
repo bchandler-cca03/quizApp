@@ -8,9 +8,9 @@ namespace Infrastructure
 {
     public class StudentQuestionHistRepositoryEf : IStudentQuestionHistRepository
     {
-        private readonly StudentQuestionHist _studentQuestionHistContext;
+        private readonly QuestionContext _studentQuestionHistContext;
 
-        public StudentQuestionHistRepositoryEf(StudentQuestionHist studentQuestionHistContext)
+        public StudentQuestionHistRepositoryEf(QuestionContext studentQuestionHistContext)
         {
             _studentQuestionHistContext = studentQuestionHistContext;
         }

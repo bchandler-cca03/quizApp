@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,12 @@ namespace quizApp.Controllers
 {
     public class QuizController : Controller
     {
-        private readonly IStudentQuizHistoryRepository 
+        private readonly IQuestionRepository _questionRepository;
+
+        public QuizController(IQuestionRepository questionRepository)
+        {
+            _questionRepository = questionRepository;
+        }
 
         // GET: Quiz
         public ActionResult Index()

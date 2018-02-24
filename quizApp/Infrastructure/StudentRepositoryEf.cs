@@ -10,14 +10,9 @@ namespace Infrastructure
     public class StudentRepositoryEf : IStudentRepository
     {
 
-        private readonly StudentContext _studentContext;
+        private readonly QuestionContext _studentContext;
 
-        public StudentRepositoryEf()
-        {
-
-        }
-
-        public StudentRepositoryEf(StudentContext studentContext)
+        public StudentRepositoryEf(QuestionContext studentContext)
         {
             _studentContext = studentContext;
         }
