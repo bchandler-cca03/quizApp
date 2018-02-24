@@ -8,11 +8,15 @@ namespace ApplicationCore.Entities
     {
         public int Id { get; set; }
 
-        public string Type { get; set; }  
+        public string Type { get; set; }
+
+        public string QuestionImg { get; set; }
 
         public string specificQuestion { get; set; }  // dot net convention, capitalize
 
         public string specificAnswer { get; set; }
+
+        public string InfoLink { get; set; }
 
     }
 }

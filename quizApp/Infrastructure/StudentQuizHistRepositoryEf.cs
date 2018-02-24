@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Infrastructure
 {
-    public class StudentQuizHistRepositoryEf : IStudentQuestionHistRepository
+    public class StudentQuizHistRepositoryEf : IStudentQuizHistRepository
     {
         private readonly StudentQuizHistContext _studentQuizHistContext;
 
@@ -17,17 +18,17 @@ namespace Infrastructure
 
         public void AddStudentQuizHist(StudentQuizHist newHist)
         {
-
+            throw new NotImplementedException();
         }
 
-        public void UpdateStudentQuizHist(StudentQuizHist updateHist)
+        public void DeleteStudentQuizHist(int id)
         {
-
+            throw new NotImplementedException();
         }
 
-        public void GetById(int id)  // this will get 1-quiz history element
+        public StudentQuizHist GetById(int id)
         {
-
+            throw new NotImplementedException();
         }
 
         public List<StudentQuizHist> ListAll()
@@ -37,7 +38,12 @@ namespace Infrastructure
 
         public List<StudentQuizHist> ListAllByStudentId(int id)
         {
-            
+            throw new NotImplementedException();
+        }
+
+        public void UpdateStudentQuizHist(StudentQuizHist updateHist)
+        {
+            throw new NotImplementedException();
         }
 
     }

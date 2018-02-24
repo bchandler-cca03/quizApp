@@ -1,0 +1,8 @@
+﻿1>------ Build started: Project: ApplicationCore, Configuration: Debug Any CPU ------
+1>ApplicationCore -> C:\Users\Bill Chandler\Documents\dotnet\quizApp\quizApp\ApplicationCore\bin\Debug\netstandard2.0\ApplicationCore.dll
+2>------ Build started: Project: Infrastructure, Configuration: Debug Any CPU ------
+2>Infrastructure -> C:\Users\Bill Chandler\Documents\dotnet\quizApp\quizApp\Infrastructure\bin\Debug\netstandard2.0\Infrastructure.dll
+3>------ Build started: Project: quizApp, Configuration: Debug Any CPU ------
+3>Controllers\QuizController.cs(15,9,15,15): error CS1585: Member modifier 'public' must precede the member type and name
+3>Done building project "quizApp.csproj" -- FAILED.
+========== Build: 2 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========

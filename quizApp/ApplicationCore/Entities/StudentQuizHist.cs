@@ -6,12 +6,17 @@ namespace ApplicationCore.Entities
 {
     public class StudentQuizHist
     {
-        public int EventId { get; set; }  // individual quiz event
+        // will keep summary information in QuizAttempt
+        // will retain specific self-graded answer results in StudentQuestionHist
+        public int Id { get; set; }
 
-        public DateTime EventDate { get; set; }  // date of quiz-question
+        public int StudentId { get; set; }
 
-        public int Result { get; set; }  // use 0 for missed, 1 for partial, 2 for fully correct
+        public int QuizId { get; set; }
 
-        public int Student { get; set; }  // identify a student by an integer
+        public float Grade { get; set; }
+
+        public int AttemptDateTime { get; set; }
+
     }
 }
