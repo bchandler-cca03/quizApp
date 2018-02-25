@@ -13,5 +13,16 @@ namespace ApplicationCore.Entities
         public string LName { get; set; }
 
         public string Email { get; set; }
+
+
+        // Navigation
+        public StudentQuestionHist StudentQuestionHist { get; set; }
+
+        public int StudentQuestionHistId { get; set; }
+
+        public StudentQuizHist StudentQuizHist { get; set; }
+
+        public int StudentQuizHistId { get; set; }
+
     }
 }

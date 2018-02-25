@@ -14,5 +14,10 @@ namespace ApplicationCore.Entities
 
         List<Question> QuizQuestionSet = new List<Question>();
 
+        // Navigation Properties
+        public StudentQuizHist StudentQuizHist { get; set; }
+
+        public int StudentQuizHistId { get; set; }
+
     }
 }
