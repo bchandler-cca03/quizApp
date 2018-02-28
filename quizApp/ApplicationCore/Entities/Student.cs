@@ -16,13 +16,13 @@ namespace ApplicationCore.Entities
 
 
         // Navigation
-        public StudentQuestionHist StudentQuestionHist { get; set; }
+        // make the below part of migration [1]
+        // public StudentQuestionHist StudentQuestionHist { get; set; }
+        // public int StudentQuestionHistId { get; set; }
 
-        public int StudentQuestionHistId { get; set; }
-
-        public StudentQuizHist StudentQuizHist { get; set; }
-
-        public int StudentQuizHistId { get; set; }
+        // make the below part of migration [2]
+        // public StudentQuizHist StudentQuizHist { get; set; }
+        // public int StudentQuizHistId { get; set; }
 
     }
 }

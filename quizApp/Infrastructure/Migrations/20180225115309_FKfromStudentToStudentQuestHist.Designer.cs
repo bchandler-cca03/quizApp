@@ -11,9 +11,10 @@ using System;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(QuestionContext))]
-    partial class QuestionContextModelSnapshot : ModelSnapshot
+    [Migration("20180225115309_FKfromStudentToStudentQuestHist")]
+    partial class FKfromStudentToStudentQuestHist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,20 +44,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.Quiz", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Category");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Quiz");
-                });
-
             modelBuilder.Entity("ApplicationCore.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -68,7 +55,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("LName");
 
+                    b.Property<int>("StudentQuestionHistId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentQuestionHistId");
 
                     b.ToTable("Students");
                 });
@@ -80,17 +71,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("EventDate");
 
-                    b.Property<int>("QuestionId");
-
                     b.Property<int>("Result");
 
-                    b.Property<int>("StudentId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentQuestionHist");
                 });
@@ -104,42 +87,16 @@ namespace Infrastructure.Migrations
 
                     b.Property<float>("Grade");
 
-                    b.Property<int>("QuizId");
-
-                    b.Property<int>("StudentId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("QuizId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentQuizHist");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.StudentQuestionHist", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.Student", b =>
                 {
-                    b.HasOne("ApplicationCore.Entities.Question", "Question")
+                    b.HasOne("ApplicationCore.Entities.StudentQuestionHist", "StudentQuestionHist")
                         .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ApplicationCore.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.StudentQuizHist", b =>
-                {
-                    b.HasOne("ApplicationCore.Entities.Quiz", "Quiz")
-                        .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ApplicationCore.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
+                        .HasForeignKey("StudentQuestionHistId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

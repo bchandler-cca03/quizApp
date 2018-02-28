@@ -23,14 +23,11 @@ namespace ApplicationCore.Entities
         public string InfoLink { get; set; }
 
         // Navigation Properties
-
-        public Quiz Quiz { get; set; }
-
-        public int QuizId { get; set; }
-
-        public StudentQuestionHist StudentQuestionHist { get; set; } 
-
-        public int StudentQuestionHistId { get; set; }
+        // make the below part of migration [2]
+        // public Quiz Quiz { get; set; }
+        // public int QuizId { get; set; }
+        // public StudentQuestionHist StudentQuestionHist { get; set; } 
+        // public int StudentQuestionHistId { get; set; }
         
     }
 }

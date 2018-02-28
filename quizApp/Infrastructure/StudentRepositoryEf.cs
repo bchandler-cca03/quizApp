@@ -30,7 +30,8 @@ namespace Infrastructure
 
         public Student GetById(int id)
         {
-            throw new NotImplementedException();
+            var _identifiedStudent = _studentContext.Students.FirstOrDefault(t => t.Id == id);
+            return _identifiedStudent;
         }
 
         public List<Student> ListAll()
@@ -40,7 +41,12 @@ namespace Infrastructure
 
         public void UpdateStudent(Student updateStudent)
         {
-            throw new NotImplementedException();
+            var identifiedStudent = GetById(updateStudent.Id);
+            identifiedStudent.FName = updateStudent.FName;
+            identifiedStudent.LName = updateStudent.LName;
+            identifiedStudent.Email = updateStudent.Email;
+
+            _studentContext.SaveChanges();
         }
     }
 }

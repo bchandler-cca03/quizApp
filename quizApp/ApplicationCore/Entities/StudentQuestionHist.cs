@@ -18,13 +18,13 @@ namespace ApplicationCore.Entities
         // note:  to obtain the students history with a question, we need the student to be
         //   a FK and the Question
 
-        // public Student Student { get; set; }
-        // public int StudentId { get; set; }  
+        public Student Student { get; set; }
+        public int StudentId { get; set; }  
                                             // StudentId is the Id of the Specific Student
                                             // moved to navigation properites
 
-        // public Question Question { get; set; }
-        // public int QuestionId { get; set; } 
+        public Question Question { get; set; }
+        public int QuestionId { get; set; } 
                                             // QuestionID is the Id of the Specific Question
 
     }

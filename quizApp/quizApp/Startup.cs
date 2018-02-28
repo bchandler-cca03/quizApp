@@ -42,6 +42,9 @@ namespace quizApp
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IQuestionRepository, QuestionRepositoryEf>();
+            services.AddScoped<IStudentRepository, StudentRepositoryEf>();
+            services.AddScoped<IStudentQuestionHistRepository, StudentQuestionHistRepositoryEf>();
+            services.AddScoped<IStudentQuizHistRepository, StudentQuizHistRepositoryEf>();
 
             services.AddMvc();
         }

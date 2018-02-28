@@ -15,9 +15,10 @@ namespace ApplicationCore.Entities
         List<Question> QuizQuestionSet = new List<Question>();
 
         // Navigation Properties
-        public StudentQuizHist StudentQuizHist { get; set; }
+        // Make the below part of a separate migration [3]
+        // public StudentQuizHist StudentQuizHist { get; set; }
 
-        public int StudentQuizHistId { get; set; }
+        // public int StudentQuizHistId { get; set; }
 
     }
 }

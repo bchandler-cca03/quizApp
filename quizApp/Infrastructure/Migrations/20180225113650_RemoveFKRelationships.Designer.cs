@@ -11,8 +11,8 @@ using System;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(QuestionContext))]
-    [Migration("20180224225858_CleanedObjectRepoMigration")]
-    partial class CleanedObjectRepoMigration
+    [Migration("20180225113650_RemoveFKRelationships")]
+    partial class RemoveFKRelationships
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,31 +35,13 @@ namespace Infrastructure.Migrations
                     b.Property<string>("QuestionImg")
                         .HasMaxLength(255);
 
-                    b.Property<int>("QuizId");
-
                     b.Property<string>("specificAnswer");
 
                     b.Property<string>("specificQuestion");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId");
-
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.Quiz", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Category");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Quiz");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Student", b =>
@@ -85,13 +67,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("EventDate");
 
-                    b.Property<int>("QuestionId");
-
-                    b.Property<int>("QuizId");
-
                     b.Property<int>("Result");
-
-                    b.Property<int>("StudentId");
 
                     b.HasKey("Id");
 
@@ -107,21 +83,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<float>("Grade");
 
-                    b.Property<int>("QuizId");
-
-                    b.Property<int>("StudentId");
-
                     b.HasKey("Id");
 
                     b.ToTable("StudentQuizHist");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.Question", b =>
-                {
-                    b.HasOne("ApplicationCore.Entities.Quiz", "Quiz")
-                        .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,12 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\20180224223319_CleanedObjectRepoMigration.cs" />
+    <Compile Remove="Migrations\20180224225858_CleanedObjectRepoMigration.cs" />
     <Compile Remove="Migrations\20180225031357_CleanedObjAndRepo.cs" />
+    <Compile Remove="Migrations\20180225105815_RemoveNavigationFromQuestHistAndQuizHist.cs" />
+    <Compile Remove="Migrations\20180225110827_LinkQuestionsToQuestHistAndQuizHist.cs" />
+    <Compile Remove="Migrations\20180225112842_AddKeyInStudentToQuestionHist.cs" />
+    <Compile Remove="Migrations\20180226001832_AddNavigationFKsToStudentQuizHist.cs" />
   </ItemGroup>
 
   <ItemGroup>

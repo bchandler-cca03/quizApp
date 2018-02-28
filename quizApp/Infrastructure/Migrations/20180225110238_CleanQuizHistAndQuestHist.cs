@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Migrations
 {
-    public partial class CleanedObjectRepoMigration : Migration
+    public partial class CleanQuizHistAndQuestHist : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,26 +31,6 @@ namespace Infrastructure.Migrations
                 maxLength: 255,
                 nullable: true);
 
-            migrationBuilder.AddColumn<int>(
-                name: "QuizId",
-                table: "Questions",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.CreateTable(
-                name: "Quiz",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Category = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Quiz", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "StudentQuestionHist",
                 columns: table => new
@@ -58,10 +38,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EventDate = table.Column<DateTime>(nullable: false),
-                    QuestionId = table.Column<int>(nullable: false),
-                    QuizId = table.Column<int>(nullable: false),
-                    Result = table.Column<int>(nullable: false),
-                    StudentId = table.Column<int>(nullable: false)
+                    Result = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,9 +52,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AttemptDateTime = table.Column<DateTime>(nullable: false),
-                    Grade = table.Column<float>(nullable: false),
-                    QuizId = table.Column<int>(nullable: false),
-                    StudentId = table.Column<int>(nullable: false)
+                    Grade = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,48 +67,48 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(nullable: true),
                     FName = table.Column<string>(nullable: true),
-                    LName = table.Column<string>(nullable: true)
+                    LName = table.Column<string>(nullable: true),
+                    StudentQuestionHistId = table.Column<int>(nullable: false),
+                    StudentQuizHistId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_StudentQuestionHist_StudentQuestionHistId",
+                        column: x => x.StudentQuestionHistId,
+                        principalTable: "StudentQuestionHist",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_StudentQuizHist_StudentQuizHistId",
+                        column: x => x.StudentQuizHistId,
+                        principalTable: "StudentQuizHist",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Questions_QuizId",
-                table: "Questions",
-                column: "QuizId");
+                name: "IX_Students_StudentQuestionHistId",
+                table: "Students",
+                column: "StudentQuestionHistId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Questions_Quiz_QuizId",
-                table: "Questions",
-                column: "QuizId",
-                principalTable: "Quiz",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_StudentQuizHistId",
+                table: "Students",
+                column: "StudentQuizHistId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Questions_Quiz_QuizId",
-                table: "Questions");
-
             migrationBuilder.DropTable(
-                name: "Quiz");
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "StudentQuestionHist");
 
             migrationBuilder.DropTable(
                 name: "StudentQuizHist");
-
-            migrationBuilder.DropTable(
-                name: "Students");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Questions_QuizId",
-                table: "Questions");
 
             migrationBuilder.DropColumn(
                 name: "Category",
@@ -145,10 +120,6 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropColumn(
                 name: "QuestionImg",
-                table: "Questions");
-
-            migrationBuilder.DropColumn(
-                name: "QuizId",
                 table: "Questions");
 
             migrationBuilder.AddColumn<string>(

@@ -15,12 +15,12 @@ namespace ApplicationCore.Entities
         public DateTime AttemptDateTime { get; set; }
 
         // Navigation Properties
-        // public Student Student { get; set; }
-        // public int StudentId { get; set; }  
+        public Student Student { get; set; }
+        public int StudentId { get; set; }  
                                             // StudentId is the Id of the Specific Student
                                             // moved to navigation properites
-        // public Quiz Quiz { get; set; }
-        // public int QuizId { get; set; }
+        public Quiz Quiz { get; set; }
+        public int QuizId { get; set; }
 
     }
 }
