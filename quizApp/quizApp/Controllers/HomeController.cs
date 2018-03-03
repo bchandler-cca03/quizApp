@@ -29,6 +29,13 @@ namespace quizApp.Controllers
             return View();
         }
 
+        public IActionResult PlayGame()
+        {
+
+            // build game here to for AJAX
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "PlayGame";
+}
+
+<!-- Originally pulled from bootstrap 3.3.7 based html file  -->
+<h2>Inside the PlayGame.html file</h2>
+
+<div class="three-quarter-width center-block container">
+    <main class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>Find Questions</h1>
+            </div>
+            <div class="panel-body">
+                <form action="#" method="POST">
+                    <button type="button" id="fetch-button" class="btn btn-success">Fetch Questions</button>
+                    <button type="button" id="clear-button" class="btn btn-info">Clear</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <aside class="col-md-7">
+        <div id="vehicle-list-panel" class="panel panel-default">
+            <div class="panel-heading">
+                <h1>Question List</h1>
+            </div>
+            <ul id="question-list" class="list-group"></ul>
+        </div>
+    </aside>
+</div>
+
+
+<script src="~/js/game.js"></script>
+

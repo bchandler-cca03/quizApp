@@ -14,7 +14,6 @@ namespace Infrastructure
         {
         }
 
-
         public DbSet<Question> Questions { get; set; }
 
         public DbSet<Student> Students { get; set; }

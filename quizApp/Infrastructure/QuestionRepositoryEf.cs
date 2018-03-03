@@ -26,7 +26,10 @@ namespace Infrastructure
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var identifiedQuestion = GetById(id);
+            _questionContext.Remove(identifiedQuestion);
+            _questionContext.SaveChanges();
+
         }
 
         public Question GetById(int id)

@@ -90,7 +90,7 @@ namespace quizApp.Controllers
         // GET: Question/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_questionRepository.GetById(id));
         }
 
         // POST: Question/Delete/5
@@ -100,9 +100,9 @@ namespace quizApp.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                    _questionRepository.Delete(id);
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
             }
             catch
             {
