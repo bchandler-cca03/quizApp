@@ -2,64 +2,32 @@
 "use strict";
 
 (function () {
-    // Variables
     var fetchButton = document.getElementById("fetch-button"),
         clearButton = document.getElementById("clear-button"),
-        showAnswerButton = document.getElementById("showAnswer"),
-        missedButton = document.getElementById("missed"),
-        partialButton = document.getElementById("partial"),
-        fullyButton = document.getElementById("fully"),
         questionList = document.getElementById("question-list"),
         questionUrn = "/api/QuesGame/",
         questionArray = [],
-        nextIdx,
         httpRequest;
     var questionObject;
 
     var newButton = document.createElement("button");
 
-    // initialize the game
-    init();
-    function init() {
-        // pull from database
-
-        // establish event listeners
-
-        // call nextQuestion function
-        nextQuestion();
-    }
-    function nextQuestion() {
-
-    }
-    function turnAnswerBlockOn() {
-        // when 'Show Answer' button is clicked, this
-        // function is called to turn on the answer and grading bar
-
-    }
-    function postQuestionResultToServer() {
-        // when the quesiton is graded, post the result,
-        // and call nextQuestion which will re-initiate.
-
-    }
-    var getData = function (questionArray) {
+    var getData = function () {
         console.log("HTTPRequest State: " + httpRequest.readyState +
             " Status: " + httpRequest.status + " : " + httpRequest.responseText);
 
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
-                renderList(questionArray, httpRequest.responseText);
-                return questionArray;
+                renderList(httpRequest.responseText);
             } else {
                 console.log("Error: " + httpRequest.status);
             }
         }
     };
-    var renderList = function renderList(questionArray, data) {
+    var renderList = function renderList(data) {
         console.log("Success!\n" + data);
         var dataArr = JSON.parse(data);
-        questionArray = dataArr;
-        console.log(questionArray[0]);
-        return questionArray;
+        // questionArray = dataArr;
     };
 
     var makeRequest = function makeRequest(urn) {
@@ -76,26 +44,15 @@
     };
     // these are the events that trigger the javascript code above
     fetchButton.addEventListener("click", function () {
-        makeRequest(questionUrn);
+        makeRequest(questionUrn, function () {
+            console.log("Make Request Done!");
+        });
     });
 
     clearButton.addEventListener("click", function () {
         questionList.innerHTML = "";
     });
 
-    showAnswerButton.addEventListener("click", function () {
-        alert("you clicked show Answer!");
-    });
-    missedButton.addEventListener("click", function () {
-        alert("you missed the answer!");
-    });
-    partialButton.addEventListener("click", function () {
-        alert("partial credit!");
-    });
-    fullyButton.addEventListener("click", function () {
-        alert("you got it right!");
-    });
-    
 
 
     // reserve code to build UI dynamically 
