@@ -90,3 +90,9 @@ button {
     color: black;
     display: inline-block;  /* check this */
 }
+.displayOff{
+    display: none;
+}
+.displayOn{
+    
+}

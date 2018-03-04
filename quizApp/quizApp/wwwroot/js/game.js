@@ -6,6 +6,8 @@
     var fetchButton = document.getElementById("fetch-button"),
         clearButton = document.getElementById("clear-button"),
         showAnswerButton = document.getElementById("showAnswer"),
+        buttonStripe = document.getElementById("buttonStripe"),
+        answerArea = document.getElementById("answerArea"),
         missedButton = document.getElementById("missed"),
         partialButton = document.getElementById("partial"),
         fullyButton = document.getElementById("fully"),
@@ -41,28 +43,27 @@
         // and call nextQuestion which will re-initiate.
 
     }
-    var getData = function (questionArray) {
+    var getData = function () {
         console.log("HTTPRequest State: " + httpRequest.readyState +
             " Status: " + httpRequest.status + " : " + httpRequest.responseText);
 
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
-                renderList(questionArray, httpRequest.responseText);
-                return questionArray;
+                renderList(httpRequest.responseText);
             } else {
                 console.log("Error: " + httpRequest.status);
             }
         }
     };
-    var renderList = function renderList(questionArray, data) {
+    var renderList = function renderList(data) {
         console.log("Success!\n" + data);
-        var dataArr = JSON.parse(data);
-        questionArray = dataArr;
-        console.log(questionArray[0]);
-        return questionArray;
+        questionArray = JSON.parse(data);
+        // var dataArr = JSON.parse(data);
+        // questionArray = dataArr;
+        // return questionArray;
     };
 
-    var makeRequest = function makeRequest(urn) {
+    var makeRequest = function makeRequest(urn, array) {
         httpRequest = new XMLHttpRequest();  // assign a new request object
 
         if (!httpRequest) {
@@ -70,7 +71,7 @@
             return false;
         }
 
-        httpRequest.onreadystatechange = getData;
+        httpRequest.onreadystatechange = getData();
         httpRequest.open("GET", urn);
         httpRequest.send();
     };
@@ -84,7 +85,12 @@
     });
 
     showAnswerButton.addEventListener("click", function () {
-        alert("you clicked show Answer!");
+
+        answerArea.classList.remove("displayOff");
+        answerArea.classList.add("displayOn");
+        stripe.classlist.remove("displayOff");
+        stripe.classlist.add("displayOn");
+
     });
     missedButton.addEventListener("click", function () {
         alert("you missed the answer!");
