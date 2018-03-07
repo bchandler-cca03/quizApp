@@ -29,22 +29,30 @@
                 <ul id="question-list" class="list-group"></ul>
             </div>
             <div>
-                <textarea rows="4" class="gameTextArea">Why is the sky blue?</textarea>
+                <textarea rows="4" class="gameTextArea" id="questionGoesHere"></textarea>
             </div>
             <div>
-                <textarea rows="8" class="gameTextArea">Enter Answer here</textarea>
+                <textarea rows="8" class="gameTextArea" placeholder="Enter Answer here"></textarea>
             </div>
             <div>
-                <button id="showAnswer" class="stripe">Show Answer</button>
+                <button id="showQuestion" class="stripe btn-info">Show Question</button>
+            </div>
+
+            <div>
+                <button id="showAnswer" class="stripe btn-info">Show Answer</button>
             </div>
             <div id="answerArea" class="displayOff">
-                <textarea  rows="8" class="gameTextArea">Fal-La-La-La-La</textarea>
+                <div>
+                    <textarea rows="8" class="gameTextArea">Fal-La-La-La-La</textarea>
+                </div>
+                <div>
+                    <button id="missed" class="btn btn-danger">Missed</button>
+                    <button id="partial" class="btn btn-info">Partially Correct</button>
+                    <button id="fully" class="btn btn-success">Fully Correct</button>
+                    <button id="print" class="btn btn-success">Print</button>
+                </div>
             </div>
-            <div id="buttonStripe" class="displayOff stripe">
-                <button id="missed">Missed</button>
-                <button id="partial">Partially Correct</button>
-                <button id="fully">Fully Correct</button>
-            </div>
+
 
         </div>
     </aside>

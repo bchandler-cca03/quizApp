@@ -6,15 +6,18 @@
     var fetchButton = document.getElementById("fetch-button"),
         clearButton = document.getElementById("clear-button"),
         showAnswerButton = document.getElementById("showAnswer"),
+        showQuestionButton = document.getElementById("showQuestion"),
         buttonStripe = document.getElementById("buttonStripe"),
         answerArea = document.getElementById("answerArea"),
         missedButton = document.getElementById("missed"),
         partialButton = document.getElementById("partial"),
         fullyButton = document.getElementById("fully"),
+        printButton = document.getElementById("print"),
         questionList = document.getElementById("question-list"),
+        insertQuestionHere = document.getElementById("questionGoesHere"),
         questionUrn = "/api/QuesGame/",
         questionArray = [],
-        nextIdx,
+        nextIdx = 0,
         httpRequest;
     var questionObject;
 
@@ -28,9 +31,11 @@
         // establish event listeners
 
         // call nextQuestion function
-        nextQuestion();
+
     }
     function nextQuestion() {
+
+        insertQuestionHere.innerText = questionArray[0].specificQuestion;
 
     }
     function turnAnswerBlockOn() {
@@ -50,6 +55,7 @@
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
                 renderList(httpRequest.responseText);
+                console.log("RenderList has been Called");
             } else {
                 console.log("Error: " + httpRequest.status);
             }
@@ -57,13 +63,13 @@
     };
     var renderList = function renderList(data) {
         console.log("Success!\n" + data);
-        questionArray = JSON.parse(data);
-        // var dataArr = JSON.parse(data);
-        // questionArray = dataArr;
-        // return questionArray;
+        var dataArr = JSON.parse(data);
+        questionArray = dataArr;  // this should assign to the global scoped variable
+        nextIdx++;
+        // return x;
     };
 
-    var makeRequest = function makeRequest(urn, array) {
+    var makeRequest = function makeRequest(urn) {
         httpRequest = new XMLHttpRequest();  // assign a new request object
 
         if (!httpRequest) {
@@ -71,7 +77,7 @@
             return false;
         }
 
-        httpRequest.onreadystatechange = getData();
+        httpRequest.onreadystatechange = getData;
         httpRequest.open("GET", urn);
         httpRequest.send();
     };
@@ -83,14 +89,14 @@
     clearButton.addEventListener("click", function () {
         questionList.innerHTML = "";
     });
+    showQuestionButton.addEventListener("click", function () {
+        nextQuestion();
+    });
+
 
     showAnswerButton.addEventListener("click", function () {
-
         answerArea.classList.remove("displayOff");
         answerArea.classList.add("displayOn");
-        stripe.classlist.remove("displayOff");
-        stripe.classlist.add("displayOn");
-
     });
     missedButton.addEventListener("click", function () {
         alert("you missed the answer!");
@@ -100,6 +106,9 @@
     });
     fullyButton.addEventListener("click", function () {
         alert("you got it right!");
+    });
+    printButton.addEventListener("click", function () {
+        console.log(questionArray[0]);
     });
     
 

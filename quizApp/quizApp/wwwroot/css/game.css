@@ -1,5 +1,6 @@
 ﻿body {
-    background-color: #232323;
+    background-color: lightskyblue;
+    /* background-color: #232323; */
     margin: 0;
     font-family: "Montserrat", "Avenir";
 }
@@ -84,11 +85,11 @@ button {
     width: 100%;
 }
 #showAnswer {
-    background: white;
-    height: 30px;
-    text-align: center;
-    color: black;
-    display: inline-block;  /* check this */
+    /* background: white;  */
+    /* height: 30px;  */
+    /* text-align: center; */
+    /* color: black;  */
+    /* display: inline-block;  */ /* check this */
 }
 .displayOff{
     display: none;
