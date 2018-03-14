@@ -11,6 +11,8 @@ namespace ApplicationCore.Interfaces
 
         Student GetById(int id);
 
+        Student GetByAspNetUserId(string guid);
+
         void AddStudent(Student newStudent);
 
         void UpdateStudent(Student updateStudent);

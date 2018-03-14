@@ -15,9 +15,9 @@ namespace ApplicationCore.Entities
         [StringLength(255)]
         public string QuestionImg { get; set; }
 
-        public string specificQuestion { get; set; }  // dot net convention, capitalize
+        public string SpecificQuestion { get; set; }  // dot net convention, capitalize
 
-        public string specificAnswer { get; set; }
+        public string SpecificAnswer { get; set; }
 
         [StringLength(255)]
         public string InfoLink { get; set; }

@@ -21,6 +21,10 @@
     margin: 20px auto;
     max-width: 600px;
 }
+#mainContainer {
+    padding: 2rem;
+    margin: 2rem;
+}
 
 h1 {
     text-align: center;
@@ -73,6 +77,8 @@ button {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     outline: none;
+    margin: 0.25rem;
+    padding: 0.25rem;
 }
 
     button:hover {

@@ -5,20 +5,24 @@
     // Variables
     var fetchButton = document.getElementById("fetch-button"),
         clearButton = document.getElementById("clear-button"),
-        showAnswerButton = document.getElementById("showAnswer"),
+        toggleAnswerButton = document.getElementById("toggleAnswer"),
         showQuestionButton = document.getElementById("showQuestion"),
         buttonStripe = document.getElementById("buttonStripe"),
         answerArea = document.getElementById("answerArea"),
         missedButton = document.getElementById("missed"),
         partialButton = document.getElementById("partial"),
         fullyButton = document.getElementById("fully"),
-        printButton = document.getElementById("print"),
+        nextQuestionButton = document.getElementById("next"),
         questionList = document.getElementById("question-list"),
         insertQuestionHere = document.getElementById("questionGoesHere"),
+        enterAnswerHere = document.getElementById("enterAnswerHere"),
         questionUrn = "/api/QuesGame/",
+        questionResultUrn = "/api/StudentQuesHist",
+        Id = document.getElementById("Id"),
         questionArray = [],
         nextIdx = 0,
         httpRequest;
+
     var questionObject;
 
     var newButton = document.createElement("button");
@@ -30,12 +34,14 @@
 
         // establish event listeners
 
-        // call nextQuestion function
+        // next question
 
     }
     function nextQuestion() {
 
-        insertQuestionHere.innerText = questionArray[0].specificQuestion;
+        insertQuestionHere.innerText = questionArray[nextIdx].specificQuestion;
+        nextIdx++;
+
 
     }
     function turnAnswerBlockOn() {
@@ -46,8 +52,32 @@
     function postQuestionResultToServer() {
         // when the quesiton is graded, post the result,
         // and call nextQuestion which will re-initiate.
-
     }
+    function postData(inputResult) {
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            console.log("Error posting XMLHttpRequestUpload object.");
+            return false;
+        }
+        // var EventDate = DateTime.Now().ToString();
+        // reference stack overflow "send-post-data-using XMLHttpRequest"
+        var params = JSON.stringify(inputResult);
+
+        httpRequest.open("POST", questionResultUrn, true);
+
+        // Send the proper header information along with the request
+        httpRequest.setRequestHeader("Content-type", "application/json");
+
+        httpRequest.onreadystatechange = function () {  // Call a function when the state changes
+            if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status == 200) {
+                console.log("httpRequest is Done");
+            }
+        };
+        // httpRequest.send(params);
+        httpRequest.send(params);
+        console.log("httpRequest Params sent");
+    };
     var getData = function () {
         console.log("HTTPRequest State: " + httpRequest.readyState +
             " Status: " + httpRequest.status + " : " + httpRequest.responseText);
@@ -65,8 +95,7 @@
         console.log("Success!\n" + data);
         var dataArr = JSON.parse(data);
         questionArray = dataArr;  // this should assign to the global scoped variable
-        nextIdx++;
-        // return x;
+        console.log(questionArray);   // let's check and make sure we are getting the correct indexes
     };
 
     var makeRequest = function makeRequest(urn) {
@@ -85,30 +114,57 @@
     fetchButton.addEventListener("click", function () {
         makeRequest(questionUrn);
     });
-
     clearButton.addEventListener("click", function () {
         questionList.innerHTML = "";
+        insertQuestionHere.innerText = "";
+        answerArea.innerText = "";
+        enterAnswerHere.innerText = "";
     });
     showQuestionButton.addEventListener("click", function () {
         nextQuestion();
     });
-
-
-    showAnswerButton.addEventListener("click", function () {
-        answerArea.classList.remove("displayOff");
-        answerArea.classList.add("displayOn");
+    toggleAnswerButton.addEventListener("click", function () {
+        if (answerArea.classList.contains("displayOn")) {
+            answerArea.classList.remove("displayOn");
+            answerArea.classList.add("displayOff");
+            toggleAnswerButton.innerText = "ShowAnswer";
+        } else if (answerArea.classList.contains("displayOff")) {
+            answerArea.classList.remove("displayOff");
+            answerArea.classList.add("displayOn");
+            toggleAnswerButton.innerText = "HideAnswer";
+        } else {
+            console.log("Error:  should not get here in toggleAnswerButton.addEventListener");
+        }
     });
     missedButton.addEventListener("click", function () {
-        alert("you missed the answer!");
+        var q = questionArray[nextIdx - 1].id;
+        console.log("Q is equal to: " + q);
+        var myStudentQuesHistoryResult = {
+            Result: 0,
+            StudentId: Id.value,
+            QuestionId: q,
+        };
+        postData(myStudentQuesHistoryResult);
     });
     partialButton.addEventListener("click", function () {
-        alert("partial credit!");
+        var myStudentQuesHistoryResult = {
+            Result: 1,
+            StudentId: 1,
+            QuestionId: questionArray[nextIdx - 1].id,
+        };
+        postData(myStudentQuesHistoryResult);
     });
     fullyButton.addEventListener("click", function () {
-        alert("you got it right!");
+        var myStudentQuesHistoryResult = {
+            Result: 2,
+            StudentId: 1,
+            QuestionId: questionArray[nextIdx - 1].id,
+        };
+        postData(myStudentQuesHistoryResult);
     });
-    printButton.addEventListener("click", function () {
-        console.log(questionArray[0]);
+    nextQuestionButton.addEventListener("click", function () {
+        nextQuestion();
+        // console.log(questionArray[0]);
     });
     
 

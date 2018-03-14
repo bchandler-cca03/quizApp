@@ -14,6 +14,7 @@ namespace ApplicationCore.Entities
 
         public string Email { get; set; }
 
+        public string AspNetUserId { get; set; }
 
         // Navigation
         // make the below part of migration [1]

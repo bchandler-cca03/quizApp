@@ -12,6 +12,7 @@
     <Compile Remove="Migrations\20180225110827_LinkQuestionsToQuestHistAndQuizHist.cs" />
     <Compile Remove="Migrations\20180225112842_AddKeyInStudentToQuestionHist.cs" />
     <Compile Remove="Migrations\20180226001832_AddNavigationFKsToStudentQuizHist.cs" />
+    <Compile Remove="Migrations\20180310011032_AddedStudentQuesHist.cs" />
   </ItemGroup>
 
   <ItemGroup>

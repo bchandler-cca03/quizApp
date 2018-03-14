@@ -17,7 +17,6 @@ namespace quizApp.Controllers
         {
             _questionRepository = questionRepository;
         }
-                  
 
         // GET: Question
         public ActionResult Index()

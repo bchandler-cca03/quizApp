@@ -5,27 +5,42 @@ using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using quizApp.Models;
+
+
 
 namespace quizApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/QuesGame")]
+    [Authorize]
     public class QuesGameController : Controller
     {
         private readonly IQuestionRepository _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IStudentRepository _student;
 
-        public QuesGameController(IQuestionRepository context)
+
+        public QuesGameController(IQuestionRepository context, 
+            UserManager<ApplicationUser> userManager,
+            IStudentRepository student)
         {
             _context = context;
+            _userManager = userManager;
+            _student = student;
 
         }
+
 
         // GET: api/QuesGame
         [HttpGet]
         public IEnumerable<Question> Get()
         {
+
             return _context.ListAll();
 
         }
@@ -65,8 +80,8 @@ namespace quizApp.Controllers
             }
             pulledQuestion.Category = updateQuestion.Category;
             pulledQuestion.QuestionImg = updateQuestion.QuestionImg;
-            pulledQuestion.specificQuestion = updateQuestion.specificQuestion;
-            pulledQuestion.specificAnswer = updateQuestion.specificAnswer;
+            pulledQuestion.SpecificQuestion = updateQuestion.SpecificQuestion;
+            pulledQuestion.SpecificAnswer = updateQuestion.SpecificAnswer;
             pulledQuestion.InfoLink = updateQuestion.InfoLink;
 
             _context.UpdateQuestion(pulledQuestion);

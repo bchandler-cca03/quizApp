@@ -7,14 +7,22 @@ namespace ApplicationCore.Interfaces
 {
     public interface IStudentQuestionHistRepository
     {
+        // List all questions student has completed
         List<StudentQuestionHist> ListAll();
 
-        StudentQuestionHist GetById(int id);
+        // List all instances a question has been answered by the student
+        List<StudentQuestionHist> GetByStudentId(int id);
 
-        void AddQuestion(StudentQuestionHist NewStudentQuestionHist);
+        // List all instances of a question being answerd by ANY student
+        List<StudentQuestionHist> GetByQuestionId(int id);
 
-        void UpdateQuestion(StudentQuestionHist UpdateStudentQuestionHist);
+        // not sure we need to add a question; we do need to RECORD the result of a question
+        void AddStudentQuestionResult(StudentQuestionHist NewStudentQuestionHist);
 
+        // we want to update a specific question record -- not sure it's really used
+        void UpdateStudentQuestionResult(StudentQuestionHist UpdateStudentQuestionHist);
+
+        // delete a student-question result
         void Delete(int id);
     }
 }

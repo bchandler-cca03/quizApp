@@ -6,8 +6,7 @@ namespace ApplicationCore.Entities
 {
     public class StudentQuestionHist
     {
-        // the history of an individual question associated with an individual student
-
+        // the history of an individual question-result associated with an individual student
         public int Id { get; set; }
 
         public DateTime EventDate { get; set; }  // date of quiz-question
@@ -18,16 +17,13 @@ namespace ApplicationCore.Entities
         // note:  to obtain the students history with a question, we need the student to be
         //   a FK and the Question
 
-       
         public Student Student { get; set; }
-
-        public int StudentId { get; set; }  
-                                            // StudentId is the Id of the Specific Student
+        public int StudentId { get; set; }  // StudentId is the Id of the Specific Student
                                             // moved to navigation properites
 
+        //-- navigtation properties below
         public Question Question { get; set; }
-        public int QuestionId { get; set; } 
-                                            // QuestionID is the Id of the Specific Question
-
+        public int QuestionId { get; set; } // QuestionID is the Id of the Specific Question
+       
     }
 }

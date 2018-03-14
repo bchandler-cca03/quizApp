@@ -1,17 +1,20 @@
-﻿
+﻿@model ApplicationCore.Entities.Student
+
 @{
     ViewData["Title"] = "PlayGame";
 }
 
 <!-- Originally pulled from bootstrap 3.3.7 based html file  -->
-<h2>Inside the PlayGame.html file</h2>
-
-<div class="three-quarter-width center-block container">
-    <main class="col-md-5">
+<div id="mainContainer" class="three-quarter-width center-block container">
+    <main class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>Find Questions</h1>
             </div>
+            <h2>Hello @Model.FName</h2>
+
+            <input type="hidden" asp-for="Id" />  <!-- question here -->
+
             <div class="panel-body">
                 <form action="#" method="POST">
                     <button type="button" id="fetch-button" class="btn btn-success">Fetch Questions</button>
@@ -20,7 +23,7 @@
             </div>
         </div>
     </main>
-    <aside class="col-md-7">
+    <aside class="col-md-8">
         <div id="vehicle-list-panel" class="panel panel-default">
             <div class="panel-heading">
                 <h1>Question List</h1>
@@ -29,27 +32,27 @@
                 <ul id="question-list" class="list-group"></ul>
             </div>
             <div>
-                <textarea rows="4" class="gameTextArea" id="questionGoesHere"></textarea>
+                <textarea rows="4" class="gameTextArea" id="questionGoesHere" placeholder="Question goes here."></textarea>
             </div>
             <div>
-                <textarea rows="8" class="gameTextArea" placeholder="Enter Answer here"></textarea>
+                <textarea id = "enterAnswerHere" rows="5" class="gameTextArea" placeholder="Enter Answer here"></textarea>
             </div>
             <div>
                 <button id="showQuestion" class="stripe btn-info">Show Question</button>
             </div>
 
             <div>
-                <button id="showAnswer" class="stripe btn-info">Show Answer</button>
+                <button id="toggleAnswer" class="stripe btn-info">Show Answer</button>
             </div>
             <div id="answerArea" class="displayOff">
                 <div>
-                    <textarea rows="8" class="gameTextArea">Fal-La-La-La-La</textarea>
+                    <textarea rows="5" class="gameTextArea">Fal-La-La-La-La</textarea>
                 </div>
                 <div>
                     <button id="missed" class="btn btn-danger">Missed</button>
                     <button id="partial" class="btn btn-info">Partially Correct</button>
                     <button id="fully" class="btn btn-success">Fully Correct</button>
-                    <button id="print" class="btn btn-success">Print</button>
+                    <button id="next" class="btn btn-success">Next Question</button>
                 </div>
             </div>
 
