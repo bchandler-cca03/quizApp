@@ -48,9 +48,10 @@ namespace Infrastructure
             _questionContext.SaveChanges();
         }
 
+        // This is the function to be modified
         public List<Question> ListAll()
         {
-            // Note:  required the System.Linq to find the "ToList()" function
+
             return _questionContext.Questions.ToList();
         }
 
