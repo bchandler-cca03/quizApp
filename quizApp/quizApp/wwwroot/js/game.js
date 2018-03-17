@@ -40,15 +40,25 @@
     function nextQuestion() {
 
         insertQuestionHere.innerText = questionArray[nextIdx].specificQuestion;
+        enterAnswerHere.value = "";
         nextIdx++;
-
-
     }
     function turnAnswerBlockOn() {
         // when 'Show Answer' button is clicked, this
         // function is called to turn on the answer and grading bar
 
     }
+    function hideAnswerArea() {
+        if (answerArea.classList.contains("displayOn")) {
+            answerArea.classList.remove("displayOn");
+            answerArea.classList.add("displayOff");
+            toggleAnswerButton.innerText = "ShowAnswer";
+        } else {
+            console.log("Error:  should not get here in toggleAnswerButton.addEventListener");
+        }
+    };
+
+
     function postQuestionResultToServer() {
         // when the quesiton is graded, post the result,
         // and call nextQuestion which will re-initiate.
@@ -70,14 +80,14 @@
         httpRequest.setRequestHeader("Content-type", "application/json");
 
         httpRequest.onreadystatechange = function () {  // Call a function when the state changes
-            if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status == 200) {
+            if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
                 console.log("httpRequest is Done");
             }
         };
         // httpRequest.send(params);
         httpRequest.send(params);
         console.log("httpRequest Params sent");
-    };
+    }
     var getData = function () {
         console.log("HTTPRequest State: " + httpRequest.readyState +
             " Status: " + httpRequest.status + " : " + httpRequest.responseText);
@@ -136,33 +146,44 @@
             console.log("Error:  should not get here in toggleAnswerButton.addEventListener");
         }
     });
+
     missedButton.addEventListener("click", function () {
         var q = questionArray[nextIdx - 1].id;
         console.log("Q is equal to: " + q);
         var myStudentQuesHistoryResult = {
             Result: 0,
             StudentId: Id.value,
-            QuestionId: q,
+            QuestionId: q
         };
         postData(myStudentQuesHistoryResult);
+        hideAnswerArea();
+        nextQuestion();
     });
     partialButton.addEventListener("click", function () {
+        var q = questionArray[nextIdx - 1].id;
+        console.log("Q is equal to: " + q);
         var myStudentQuesHistoryResult = {
             Result: 1,
-            StudentId: 1,
-            QuestionId: questionArray[nextIdx - 1].id,
+            StudentId: Id.value,
+            QuestionId: q
         };
         postData(myStudentQuesHistoryResult);
+        hideAnswerArea();
+        nextQuestion();
     });
     fullyButton.addEventListener("click", function () {
+        var q = questionArray[nextIdx - 1].id;
         var myStudentQuesHistoryResult = {
             Result: 2,
-            StudentId: 1,
-            QuestionId: questionArray[nextIdx - 1].id,
+            StudentId: Id.value,
+            QuestionId: q
         };
         postData(myStudentQuesHistoryResult);
+        hideAnswerArea();
+        nextQuestion();
     });
     nextQuestionButton.addEventListener("click", function () {
+        hideAnswerArea();
         nextQuestion();
         // console.log(questionArray[0]);
     });

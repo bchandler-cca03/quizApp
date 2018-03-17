@@ -21,6 +21,7 @@ namespace quizApp.Controllers
         // GET: Question
         public ActionResult Index()
         {
+            var foo = _questionRepository.NextDueQuestions(1);
             return View(_questionRepository.ListAll());
         }
 

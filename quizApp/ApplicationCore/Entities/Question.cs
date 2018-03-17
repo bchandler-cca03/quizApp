@@ -24,6 +24,6 @@ namespace ApplicationCore.Entities
         [StringLength(255)]
         public string InfoLink { get; set; }
       
-        List<StudentQuestionHist> StudentQuestionHists { get; set; }
+        public List<StudentQuestionHist> StudentQuestionHists { get; set; }
     }
 }
