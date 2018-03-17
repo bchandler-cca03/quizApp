@@ -9,6 +9,8 @@ namespace ApplicationCore.Interfaces
     {
         List<Question> ListAll();
 
+        List<Question> NextDueQuestions(int studentId);
+
         Question GetById(int id);
 
         void AddQuestion(Question newQuestion);

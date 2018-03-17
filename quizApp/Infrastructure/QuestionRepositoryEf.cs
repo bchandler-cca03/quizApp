@@ -55,5 +55,12 @@ namespace Infrastructure
             return _questionContext.Questions.ToList();
         }
 
+        public List<Question> NextDueQuestions(int studentId)
+        {
+            _questionContext.StudentQuestionHist.
+
+                return something
+        }
+
     }
 }

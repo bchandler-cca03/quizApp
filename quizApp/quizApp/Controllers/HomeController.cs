@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using ApplicationCore.Entities;
 using Microsoft.AspNetCore.Mvc;
 using quizApp.Models;
 
@@ -49,10 +50,24 @@ namespace quizApp.Controllers
         [Authorize]
         public IActionResult PlayGame()
         {
+            string userGuid = _userManager.GetUserId(HttpContext.User);
 
-            var studentProfile = _student.GetByAspNetUserId(_userManager.GetUserId(HttpContext.User));
+            var studentProfile = _student.GetByAspNetUserId(userGuid);
 
+            if(studentProfile == null)
+            {
+                studentProfile = new Student
+                {
+                    AspNetUserId = userGuid,
+                    FName = "",
+                    LName = "",
+                    Email = User.Identity.Name
+                };
+                _student.AddStudent(studentProfile);
+            }
+            
             return View(studentProfile);
+
         }
 
         public IActionResult Error()

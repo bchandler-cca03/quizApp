@@ -43,6 +43,7 @@ namespace Infrastructure
 
         public List<StudentQuestionHist> ListAll()
         {
+
             return _studentQuestionHistContext.StudentQuestionHist.ToList<StudentQuestionHist>();
         }
 

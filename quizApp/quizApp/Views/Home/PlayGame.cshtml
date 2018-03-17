@@ -11,9 +11,9 @@
             <div class="panel-heading">
                 <h1>Find Questions</h1>
             </div>
-            <h2>Hello @Model.FName</h2>
+               <h2>Hello @Model.FName</h2>
 
-            <input type="hidden" asp-for="Id" />  <!-- question here -->
+            <input type="hidden" asp-for="Id"/>  <!-- question here -->
 
             <div class="panel-body">
                 <form action="#" method="POST">
@@ -35,7 +35,7 @@
                 <textarea rows="4" class="gameTextArea" id="questionGoesHere" placeholder="Question goes here."></textarea>
             </div>
             <div>
-                <textarea id = "enterAnswerHere" rows="5" class="gameTextArea" placeholder="Enter Answer here"></textarea>
+                <textarea id="enterAnswerHere" rows="5" class="gameTextArea" placeholder="Enter Answer here"></textarea>
             </div>
             <div>
                 <button id="showQuestion" class="stripe btn-info">Show Question</button>

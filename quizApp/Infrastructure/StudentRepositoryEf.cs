@@ -37,6 +37,11 @@ namespace Infrastructure
         public Student GetByAspNetUserId(String userGuid)
         {
             var _identifiedUser = _studentContext.Students.FirstOrDefault(t => t.AspNetUserId == userGuid);
+            if (_identifiedUser == null)
+            {
+                return _identifiedUser;
+            }
+
             return _identifiedUser;
         }
 

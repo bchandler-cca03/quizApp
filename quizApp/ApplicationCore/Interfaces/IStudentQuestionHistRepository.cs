@@ -7,7 +7,7 @@ namespace ApplicationCore.Interfaces
 {
     public interface IStudentQuestionHistRepository
     {
-        // List all questions student has completed
+        // List all questions in database
         List<StudentQuestionHist> ListAll();
 
         // List all instances a question has been answered by the student

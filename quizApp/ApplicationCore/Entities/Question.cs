@@ -15,12 +15,15 @@ namespace ApplicationCore.Entities
         [StringLength(255)]
         public string QuestionImg { get; set; }
 
+        [StringLength(255)]
         public string SpecificQuestion { get; set; }  // dot net convention, capitalize
 
+        [StringLength(255)]
         public string SpecificAnswer { get; set; }
 
         [StringLength(255)]
         public string InfoLink { get; set; }
       
+        List<StudentQuestionHist> StudentQuestionHists { get; set; }
     }
 }
