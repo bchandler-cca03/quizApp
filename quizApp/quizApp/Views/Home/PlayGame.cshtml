@@ -6,19 +6,34 @@
 
 <!-- Originally pulled from bootstrap 3.3.7 based html file  -->
 <div id="mainContainer" class="three-quarter-width center-block container">
+    <!-- Small modal -->
+    <div id="modalDiv">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <main class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>Find Questions</h1>
             </div>
-               <h2>Hello @Model.FName</h2>
+            <h2>Hello @Model.FName</h2>
 
-            <input type="hidden" asp-for="Id"/>  <!-- question here -->
+            <input type="hidden" asp-for="Id" />  <!-- question here -->
 
             <div class="panel-body">
                 <form action="#" method="POST">
                     <button type="button" id="fetch-button" class="btn btn-success">Fetch Questions</button>
                     <button type="button" id="clear-button" class="btn btn-info">Clear</button>
+                    <button type="button" id="start-quiz" class="btn btn-success">Start</button>
                 </form>
             </div>
         </div>
@@ -46,7 +61,7 @@
             </div>
             <div id="answerArea" class="displayOff">
                 <div>
-                    <textarea rows="5" class="gameTextArea">Fal-La-La-La-La</textarea>
+                    <textarea rows="5" id="specificAnswerHere" class="gameTextArea"></textarea>
                 </div>
                 <div>
                     <button id="missed" class="btn btn-danger">Missed</button>

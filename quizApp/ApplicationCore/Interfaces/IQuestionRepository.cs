@@ -9,7 +9,7 @@ namespace ApplicationCore.Interfaces
     {
         List<Question> ListAll();
 
-        List<Question> NextDueQuestions(int studentId);
+        // List<Question> NextDueQuestions(int studentId);
 
         Question GetById(int id);
 

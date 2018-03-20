@@ -55,16 +55,7 @@ namespace Infrastructure
             return _questionContext.Questions.ToList();
         }
 
-        public List<Question> NextDueQuestions(int studentId)
-        {
-            // add Linq query
-            var results = _questionContext.Questions
-                .Include(q => q.StudentQuestionHists.Where(h => h.StudentId == studentId))
-                .DefaultIfEmpty()
-                .ToList();
 
-            return results;
-        }
 
     }
 }

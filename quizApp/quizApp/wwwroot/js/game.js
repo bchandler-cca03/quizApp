@@ -5,6 +5,7 @@
     // Variables
     var fetchButton = document.getElementById("fetch-button"),
         clearButton = document.getElementById("clear-button"),
+        startQuizButton = document.getElementById("start-quiz"),
         toggleAnswerButton = document.getElementById("toggleAnswer"),
         showQuestionButton = document.getElementById("showQuestion"),
         buttonStripe = document.getElementById("buttonStripe"),
@@ -12,15 +13,17 @@
         missedButton = document.getElementById("missed"),
         partialButton = document.getElementById("partial"),
         fullyButton = document.getElementById("fully"),
+        modalDiv = document.getElementById("modalDiv"),
         nextQuestionButton = document.getElementById("next"),
         questionList = document.getElementById("question-list"),
         insertQuestionHere = document.getElementById("questionGoesHere"),
         enterAnswerHere = document.getElementById("enterAnswerHere"),
+        specificAnswerHere = document.getElementById("specificAnswerHere"),
         questionUrn = "/api/QuesGame/",
         questionResultUrn = "/api/StudentQuesHist",
         Id = document.getElementById("Id"),
         questionArray = [],
-        nextIdx = 0,
+        nextIdx = 1,
         httpRequest;
 
     var questionObject;
@@ -38,10 +41,18 @@
 
     }
     function nextQuestion() {
-
-        insertQuestionHere.innerText = questionArray[nextIdx].specificQuestion;
-        enterAnswerHere.value = "";
-        nextIdx++;
+        if (nextIdx > questionArray.length - 1) {
+            // STOP HERE!!!
+            // ZZZ Add something that change #modalDiv to visible in CSS
+            // which should trigger the action to post the modal
+            modalDiv.classList.remove("hidden");
+            modalDiv.classList.add("visible");
+            console.log("pause");
+        } else {
+            insertQuestionHere.innerText = questionArray[nextIdx].specificQuestion;
+            enterAnswerHere.value = "";
+            nextIdx++;
+        }
     }
     function turnAnswerBlockOn() {
         // when 'Show Answer' button is clicked, this
@@ -57,10 +68,8 @@
             console.log("Error:  should not get here in toggleAnswerButton.addEventListener");
         }
     };
-
-
     function postQuestionResultToServer() {
-        // when the quesiton is graded, post the result,
+        // when the question is graded, post the result,
         // and call nextQuestion which will re-initiate.
     }
     function postData(inputResult) {
@@ -107,7 +116,6 @@
         questionArray = dataArr;  // this should assign to the global scoped variable
         console.log(questionArray);   // let's check and make sure we are getting the correct indexes
     };
-
     var makeRequest = function makeRequest(urn) {
         httpRequest = new XMLHttpRequest();  // assign a new request object
 
@@ -129,7 +137,12 @@
         insertQuestionHere.innerText = "";
         answerArea.innerText = "";
         enterAnswerHere.innerText = "";
+        nextIdx = 0;
     });
+    startQuizButton.addEventListener("click", function () {
+        nextQuestion();
+    });
+
     showQuestionButton.addEventListener("click", function () {
         nextQuestion();
     });
@@ -142,6 +155,9 @@
             answerArea.classList.remove("displayOff");
             answerArea.classList.add("displayOn");
             toggleAnswerButton.innerText = "HideAnswer";
+
+            specificAnswerHere.value = questionArray[nextIdx - 1].specificAnswer;
+
         } else {
             console.log("Error:  should not get here in toggleAnswerButton.addEventListener");
         }
@@ -187,55 +203,9 @@
         nextQuestion();
         // console.log(questionArray[0]);
     });
-    
 
-
-    // reserve code to build UI dynamically 
-    // dataArr.forEach(function (item, idx, arr) {
-    // console.log(item.specificQuestion);
-    // console.log(item.specificAnswer);
-
-    // var newItem = document.createElement("li");
-    // var newAnchor = document.createElement("a");
-    // var newAnswerTextArea = document.createElement("TEXTAREA");
-    // var newDiv = document.createElement("DIV");
-
-    // //www.w3schools.com/jsref/met_document_createelement.asp
-    // var btn = document.createElement("BUTTON");        // Create a <button> element
-    // var t = document.createTextNode("Click");          // Create a text node
-
-    // construct the question
-    // newItem.classList.add("list-group-item");
-    // newItem.classList.add("bg-success");
-
-    // newAnchor.id = item.id;
-    // newAnchor.href = questionUrn + item.id;
-    // newAnchor.innerText = item.specificQuestion;
-
-    // append the question
-    // newItem.appendChild(newAnchor);
-    // questionList.appendChild(newItem);
-
-    // add text box for answer
-    // newAnswerTextArea.rows(8);
-    // newAnswerTextArea.setAttribute('rows', 8);
-    // newAnswerTextArea.classList.add("gameAnswerBox");
-    // questionList.appendChild(newAnswerTextArea);
-
-    // insert row
-    // newDiv.classList.add("row");
-    // questionList.appendChild(newDiv);
-
-    // next 2 lines from w3schools ...
-    // btn.appendChild(t);                                // Append the text to <button>
-    // btn.classList.add("btn");
-    // btn.classList.add("btn-success");
-
-    // append the button to something else.
-    // newItem.appendChild(btn);                    // Append <button> to <body> 
-            // newButton.classList.add("bg-success");
-            // newButton.add.innerHTML("Check Answer");
-
-    // });
+    $('#modalDiv').on('shown.bs.modal', function () {
+        $('#modalDiv').focus();
+      });
 
 })();

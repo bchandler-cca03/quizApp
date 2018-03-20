@@ -103,3 +103,6 @@ button {
 .displayOn{
     
 }
+#modalDiv {
+    visibility: hidden;
+}
