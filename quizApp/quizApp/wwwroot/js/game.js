@@ -42,12 +42,11 @@
     }
     function nextQuestion() {
         if (nextIdx > questionArray.length - 1) {
-            // STOP HERE!!!
             // ZZZ Add something that change #modalDiv to visible in CSS
             // which should trigger the action to post the modal
-            modalDiv.classList.remove("hidden");
-            modalDiv.classList.add("visible");
             console.log("pause");
+            // $('#modalDiv').modal({ keyboard: "true" });
+            $('#modalDiv').modal('show');
         } else {
             insertQuestionHere.innerText = questionArray[nextIdx].specificQuestion;
             enterAnswerHere.value = "";
@@ -204,8 +203,8 @@
         // console.log(questionArray[0]);
     });
 
-    $('#modalDiv').on('shown.bs.modal', function () {
-        $('#modalDiv').focus();
-      });
+    // $('#modalDiv').on('shown.bs.modal', function () {
+    //     $('modalDiv').focus();
+    //  });
 
 })();
